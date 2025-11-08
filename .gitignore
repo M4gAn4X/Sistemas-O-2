@@ -7,5 +7,5 @@
 *.lof
 *.log
 *.lot
-*.syntex.gz
+*.synctex.gz
 *.toc
