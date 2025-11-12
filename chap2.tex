@@ -15,16 +15,16 @@ Sitio web del proyecto: \url{https://www.helenos.org}.
 
 Documentación técnica (PDF): \url{https://www.helenos.org/doc/prjdoc.pdf}
 
-\subsubsection{Objetivo del proyecto (educativo, experimental, comercial)}
+\subsubsection{Objetivo del proyecto}
 El objetivo de HelenOS es principalmente \textbf{educativo y experimental}. Su propósito es servir como plataforma de estudio de sistemas operativos modernos, promoviendo un enfoque modular donde cada servicio (sistema de archivos, red, controladores o interfaz gráfica) se implementa como un servidor independiente en espacio de usuario. Este diseño fomenta el análisis de conceptos avanzados como la comunicación entre procesos (IPC) y la separación entre el núcleo y los servicios de usuario \cite{helenos_about}.
 
-\subsubsection{Lenguaje(s) de implementación}
+\subsubsection{Lenguaje de implementación}
 El proyecto está desarrollado principalmente en el lenguaje \textbf{C}, con partes críticas escritas en \textbf{ensamblador} (para el arranque del sistema y la gestión de interrupciones). Se mantiene compatibilidad con los estándares \textbf{C11} y \textbf{C++14}, facilitando la portabilidad y la integración de nuevos componentes \cite{helenos_prjdoc}.
 
-\subsubsection{Arquitectura del sistema (monolítica, microkernel, etc.)}
+\subsubsection{Arquitectura del sistema}
 HelenOS adopta una arquitectura \textbf{microkernel multiserver}. El microkernel proporciona únicamente los servicios esenciales —planificación, gestión de memoria, interrupciones e IPC— mientras que todos los demás servicios (como el sistema de archivos, la red o la interfaz gráfica) se ejecutan como procesos de usuario independientes que se comunican mediante paso de mensajes (\emph{message passing}) \cite{helenos_prjdoc}.
 
-\subsubsection{Componentes implementados (procesos, memoria, archivos, etc.)}
+\subsubsection{Componentes implementados}
 \begin{itemize}
 	\item \textbf{Gestión de procesos e hilos:} Soporta multitarea con planificación por prioridades y aislamiento entre procesos. El modelo de ejecución permite múltiples hilos por proceso y comunicación sincronizada entre ellos mediante IPC.
 
@@ -45,7 +45,7 @@ HelenOS adopta una arquitectura \textbf{microkernel multiserver}. El microkernel
 	\item \textbf{Portabilidad:} El código fuente está diseñado para ser independiente de la arquitectura. Actualmente soporta múltiples plataformas: \texttt{ia32}, \texttt{amd64}, \texttt{arm32}, \texttt{mips32}, \texttt{ppc32}, \texttt{sparc64} e incluso \texttt{ia64} (Itanium).
 \end{itemize}
 
-\subsubsection{Herramientas utilizadas (compiladores, emuladores, etc.)}
+\subsubsection{Herramientas utilizadas}
 
 El proceso de compilación y prueba de HelenOS requiere la preparación de un entorno de desarrollo cruzado (\emph{cross-compiling}) que permite generar imágenes del sistema para múltiples arquitecturas. A continuación se detallan las principales herramientas utilizadas:
 
@@ -76,15 +76,15 @@ El proceso de compilación y prueba de HelenOS requiere la preparación de un en
 Además, el repositorio incluye scripts auxiliares en \texttt{tools/ew.py} que automatizan el proceso de arranque en QEMU, y configuraciones predefinidas en \texttt{tools/conf} para ajustar parámetros de memoria o dispositivos virtuales.
 
 \begin{figure}[H]
-  \centering
-  \includegraphics[width=1\linewidth]{figures/helenos_toolchain.png}
-  \caption{Elaboración Propia. Compilación cruzada del toolchain.sh}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/helenos_toolchain.png}
+	\caption{Elaboración Propia. Compilación cruzada del toolchain.sh}
 \end{figure}
 
 \subsubsection{Nivel de complejidad y accesibilidad}
 El nivel de complejidad de HelenOS es alto, ya que su comprensión requiere conocimientos de compilación cruzada, IPC y gestión de memoria. Sin embargo, su estructura modular y bien documentada lo convierte en una excelente herramienta didáctica donde se pueden analizar de manera aislada servicios específicos como el sistema de archivos o el entorno gráfico \cite{helenos_docs}.
 
-\begin{table}[!htbp]
+\begin{table}[H]
 	\centering
 	\caption{Ficha técnica resumida de HelenOS.}
 	\vspace{1em}
@@ -102,4 +102,86 @@ El nivel de complejidad de HelenOS es alto, ya que su comprensión requiere cono
 	\textit{Nota.} Adaptado de “About HelenOS” (HelenOS Project, 2024)
 \end{table}
 
+% =========================
+% Propuesta 2: Visopsys
+% =========================
+\subsection{Visopsys}
 
+\subsubsection{Nombre del proyecto o sistema operativo}
+Visopsys (\textit{Visual Operating System}) es un sistema operativo alternativo, gratuito y desarrollado desde cero por Andy McLaughlin desde 1997. A diferencia de otros sistemas, no está basado en Unix ni Linux, sino que implementa su propio kernel, gestor de archivos y entorno gráfico. Está diseñado para ser compacto, rápido y con una interfaz visual moderna, integrando tanto funcionalidades de línea de comandos como de entorno gráfico \cite{visopsys_about, visopsys_scribd}.
+
+\subsubsection{Enlace al repositorio y/o documentación oficial}
+Repositorio oficial y descargas: \url{https://sourceforge.net/projects/visopsys/files/}
+
+Sitio web del proyecto: \url{https://visopsys.org}
+
+Presentación técnica (Scribd): \url{https://es.scribd.com/presentation/619552414/SO-visopsys}
+
+\subsubsection{Objetivo del proyecto }
+El objetivo de Visopsys es \textbf{educativo y experimental}. Busca proporcionar una plataforma funcional que demuestre los principios fundamentales del diseño de sistemas operativos, la gestión de procesos, la memoria y los sistemas de archivos. Está enfocado en ser simple, visual y completamente entendible, lo que lo hace ideal para el estudio de arquitecturas operativas en cursos de ingeniería de sistemas o informática \cite{visopsys_scribd}.
+
+\subsubsection{Lenguajes de implementación}
+El sistema está implementado principalmente en el lenguaje \textbf{C}, con secciones críticas escritas en \textbf{ensamblador x86}. Esta combinación le permite optimizar la comunicación con el hardware y mantener un tamaño reducido del núcleo y del sistema base \cite{visopsys_sourceforge}.
+
+\subsubsection{Arquitectura del sistema}
+Visopsys implementa una arquitectura \textbf{monolítica modular}. Su núcleo controla directamente los procesos, la gestión de memoria, el sistema de archivos y los controladores de dispositivos, aunque permite la carga dinámica de módulos y extensiones en tiempo de ejecución. Esto le otorga un balance entre rendimiento, simplicidad y capacidad de expansión \cite{visopsys_about}.
+
+\subsubsection{Componentes implementados}
+\begin{itemize}
+	\item \textbf{Gestión de procesos e hilos:} Visopsys soporta multitarea cooperativa y por prioridades, con un planificador de procesos básico implementado en su núcleo. Cada tarea dispone de su propio contexto de ejecución y control de interrupciones.
+
+	\item \textbf{Gestión de memoria:} Implementa un sistema de memoria virtual simple con asignación dinámica y control directo del espacio de direcciones. El sistema garantiza aislamiento básico entre tareas activas.
+
+	\item \textbf{Sistema de archivos:} Integra su propio sistema VFS con soporte para FAT12, FAT16 y FAT32, además de detección de tablas de particiones MBR y GPT. Incluye herramientas gráficas para formateo, copia, borrado y verificación de discos.
+
+	\item \textbf{Dispositivos y controladores:} Dispone de controladores nativos para discos IDE y SATA, tarjetas gráficas básicas (modo VESA), teclado, mouse y almacenamiento USB. Los drivers se integran directamente en el kernel.
+
+	\item \textbf{Interfaz gráfica (GUI):} Ofrece un entorno gráfico funcional con ventanas, menús y una barra de herramientas principal. Incluye aplicaciones integradas como un administrador de archivos, visor hexadecimal, editor de texto y panel de control del sistema.
+
+	\item \textbf{Herramientas del sistema:} Contiene utilidades para crear, copiar o gestionar particiones, visualizar la memoria y monitorear el rendimiento del CPU en tiempo real.
+
+	\item \textbf{Soporte de hardware:} El sistema está diseñado para funcionar en procesadores x86 y x86-64, aunque se ejecuta principalmente en entornos de 32 bits para mantener compatibilidad amplia.
+\end{itemize}
+
+\subsubsection{Herramientas utilizadas}
+Visopsys puede compilarse con \textbf{GCC} en sistemas Linux, BSD o Windows mediante entornos cruzados. También se distribuye como una \textbf{ISO ejecutable} que puede probarse directamente sin instalación.
+
+\begin{itemize}
+	\item \textbf{Compilador:} GCC y utilidades estándar de GNU (\texttt{make}, \texttt{binutils}).
+	\item \textbf{Entorno de prueba:} Compatible con \textbf{VirtualBox} y \textbf{QEMU}.
+	\item \textbf{Configuración sugerida:}
+	      \begin{verbatim}
+Sistema: Other/Unknown (32-bit)
+Memoria: 256 MB
+Arranque: visopsys-0.92.iso
+Desactivar EFI y habilitar CD-ROM
+  \end{verbatim}
+	\item \textbf{Ejecución:} Al iniciar desde la ISO, carga automáticamente el entorno gráfico sin requerir instalación.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{figures/visopsys_gui.png}
+	\caption{Implementación de Visopsys en VirtualBox.}
+\end{figure}
+
+\subsubsection{Nivel de complejidad y accesibilidad}
+El nivel de complejidad de Visopsys es \textbf{medio}, ya que su código fuente es legible y su estructura modular facilita el aprendizaje. Permite explorar los conceptos fundamentales de sistemas operativos, como la planificación, memoria, drivers y GUI, dentro de un único entorno funcional y visual \cite{visopsys_scribd}.
+
+\begin{table}[H]
+	\centering
+	\caption{Ficha técnica resumida de Visopsys.}
+	\vspace{1em}
+	\begin{tabular}{p{4cm}p{10cm}}
+		\hline
+		\textbf{Diseño}            & Monolítico modular con GUI integrada                                                \\ \hline
+		\textbf{Lenguajes}         & C y ensamblador (x86)                                                               \\
+		\textbf{Arquitecturas}     & x86 (32 bits)                                                                       \\
+		\textbf{Componentes clave} & Kernel, VFS, GUI, gestor de procesos, controladores IDE/SATA, herramientas gráficas \\
+		\textbf{Herramientas}      & GCC, Make, VirtualBox/QEMU                                                          \\
+		\textbf{Uso educativo}     & Medio: análisis de kernel, GUI y gestión de memoria                                 \\
+		\hline
+	\end{tabular}\\
+	\vspace{1mm}
+	\textit{Nota.} Adaptado de “SO Visopsys” (McLaughlin, 2023).
+\end{table}
